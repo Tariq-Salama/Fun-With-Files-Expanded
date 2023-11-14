@@ -1,0 +1,101 @@
+/**
+ * Program to copy one file into another, using command line arguments
+ *
+ * @author Tariq Salama
+ * @author Abib Abib
+ * @version 20231112
+ *
+ */
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class FilesExpanded {
+   
+   /**
+    * Displays the file given by fname to the screen
+    * 
+    * @param fname file to be displayed
+    */
+   public static void displayFile(String fname) {
+        //TODO: Open the file and print each line to the screen.
+        //TODO: Don't forget to close the file when you are done.
+        try {
+
+            File poam = new File(fname);
+            // Create a Scanner object to read the file
+            Scanner input = new Scanner(poam);
+            // Iterate through each line of the file and print its reversed version
+            while(input.hasNext()){
+
+               String text= input.nextLine();
+
+               String reversedWord = reverse(text);
+               // Print the reversed line to the console
+               System.out.println(reversedWord );
+
+            }
+
+            input.close();
+
+
+        } catch (FileNotFoundException e) {
+           // Print an error message if the file is not found
+            System.out.println("ERROR - File "+ fname + " not found!");
+
+        }
+
+   }
+   
+   /**
+    * Creates a reversed copy of a String
+    * 
+    * @param str string to be reversed
+    * @return reversed copy of str
+    */
+   public static String reverse(String str) {
+      //TODO: Reverse the string
+      
+      //TODO: Remove the line below - only included so code will compile.
+ int word = str.length();
+     // Create a char array to store the reversed string
+      char[] reversedWord = new char[word];
+
+      for(int i = 0; i < word; i++){
+         // Fill the reversedWord array with the reversed characters
+         reversedWord[i] = str.charAt(word - 1 - i);
+
+      }
+      // Return the reversed string created from reversedWord array
+      return new String(reversedWord);
+
+   }
+
+
+    public static void main(String[] args) {
+      //TODO: Prompt the user for a filename 
+      Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a filename (blank line to quit): ");
+
+        String userfile = scanner.nextLine();
+      // Keep asking for a filename until the user enters a blank line
+        while (!userfile.isBlank()) {
+           // Display the reversed content of the file
+            displayFile(userfile);
+
+            // Prompt for another filename or quit
+            System.out.print("\nEnter another filename (blank line to quit): ");
+
+            userfile = scanner.nextLine();
+
+        }
+
+        System.out.println("\nGoodbye!");
+
+        scanner.close();
+
+    }
+}
+
